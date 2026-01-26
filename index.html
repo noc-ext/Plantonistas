@@ -13,7 +13,7 @@
             height: 100vh;
             width: 100vw;
             display: flex;
-            overflow: hidden; /* Evita barras de rolagem desnecessárias */
+            overflow: hidden; 
         }
         
         .container {
@@ -25,7 +25,7 @@
 
         /* Lado Esquerdo - Menu */
         .left-panel {
-            width: 350px; /* Largura fixa para o menu */
+            width: 350px;
             background-color: #1e1e1e;
             border-right: 1px solid #333;
             padding: 30px;
@@ -33,18 +33,19 @@
             flex-direction: column;
             box-shadow: 2px 0 15px rgba(0,0,0,0.5);
             z-index: 10;
+            overflow-y: auto; 
         }
 
         /* Lado Direito - Conteúdo */
         .right-panel {
-            flex: 1; /* Ocupa todo o resto da tela */
+            flex: 1;
             background-color: #121212;
-            padding: 40px;
+            padding: 20px 40px; 
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; 
             align-items: center;
-            overflow-y: auto; /* Permite rolagem se a lista for longa */
+            overflow-y: auto; 
         }
 
         h2 { 
@@ -83,35 +84,38 @@
         /* Card de Resultado */
         .result-container {
             width: 100%;
-            max-width: 800px; /* Limita a largura para não ficar esticado demais */
+            max-width: 1100px;
+            margin-top: 20px;
         }
 
         .info-card {
             background: #1e1e1e;
             border: 1px solid #333;
             border-radius: 12px;
-            padding: 40px;
+            padding: 30px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             animation: fadeIn 0.4s ease-out;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .label-res { 
-            font-size: 14px; 
+            font-size: 13px; 
             text-transform: uppercase; 
             color: #78909c; 
-            letter-spacing: 1.5px; 
+            letter-spacing: 1.2px; 
             font-weight: bold; 
             display: block; 
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .value-res { 
-            font-size: 28px; /* Fonte bem grande */
+            font-size: 24px; 
             font-weight: 700; 
             color: #ffffff; 
             display: block; 
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .badge { 
@@ -120,7 +124,7 @@
             border-radius: 50px; 
             font-size: 16px; 
             font-weight: bold; 
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -132,10 +136,32 @@
         .bg-pix { background: #00695c; color: #ffffff; }
         .bg-arquitetura { background: #455a64; color: #ffffff; }
         .bg-infra { background: #37474f; color: #eceff1; }
+        .bg-cambio { background: #2e7d32; color: #ffffff; }
+        .bg-canais { background: #f9a825; color: #ffffff; }
+        .bg-corporativos { background: #ad1457; color: #ffffff; }
+        .bg-rendix { background: #0277bd; color: #ffffff; }
+        .bg-core { background: #c62828; color: #ffffff; }
+        .bg-incidentes { background: #e65100; color: #ffffff; } /* Cor nova */
         
         .contact-methods { font-size: 14px; color: #81c784; font-weight: 500; margin-top: -15px; margin-bottom: 25px; }
         
-        /* Lista Estilizada para PIX/Arquitetura/Infra */
+        /* Layout em Colunas (Masonry) para listas longas */
+        .masonry-layout {
+            column-count: 2; 
+            column-gap: 20px;
+            text-align: left;
+            width: 100%;
+        }
+
+        @media (min-width: 1400px) {
+            .masonry-layout { column-count: 3; }
+        }
+
+        @media (max-width: 1000px) {
+            .masonry-layout { column-count: 1; }
+        }
+
+        /* Grid simples para itens menores */
         .list-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -148,33 +174,47 @@
             padding: 20px;
             border-radius: 8px;
             border: 1px solid #333;
+            break-inside: avoid;
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .section-header {
             width: 100%;
-            font-size: 18px;
+            font-size: 16px;
             color: #64b5f6;
             border-bottom: 1px solid #444;
-            padding-bottom: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-align: left;
-            grid-column: 1 / -1; /* Ocupa toda a linha */
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
+
+        .item-row {
+            margin-bottom: 15px;
+        }
+        .item-row:last-child { margin-bottom: 0; }
+
+        .name-text { font-size: 18px; color: #fff; font-weight: 600; display: block; }
+        .phone-text { font-size: 16px; color: #81c784; display: block; margin-top: 2px; }
 
         /* Placeholder */
         .placeholder {
             color: #555;
             font-size: 24px;
             font-weight: 300;
+            margin-top: 100px;
         }
 
         /* Responsividade Mobile */
         @media (max-width: 900px) {
             .container { flex-direction: column; overflow-y: auto; }
-            .left-panel { width: 100%; height: auto; box-sizing: border-box; padding: 20px; }
-            .right-panel { height: auto; padding: 20px; }
+            .left-panel { width: 100%; height: auto; box-sizing: border-box; padding: 20px; flex: none; }
+            .right-panel { height: auto; padding: 20px; flex: 1; justify-content: flex-start; }
             body { overflow: auto; }
+            .info-card { padding: 20px; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -196,6 +236,12 @@
                 <option value="PIX">PIX</option>
                 <option value="ARQUITETURA">ARQUITETURA</option>
                 <option value="INFRA">INFRAESTRUTURA</option>
+                <option value="CAMBIO">CÂMBIO</option>
+                <option value="CANAIS">CANAIS</option>
+                <option value="CORPORATIVOS">CORPORATIVOS</option>
+                <option value="RENDIX">RENDIX / RENDPAY</option>
+                <option value="CORE">CORE\AUTBANK</option>
+                <option value="INCIDENTES">GESTÃO DE INCIDENTES</option>
             </select>
         </div>
 
@@ -214,7 +260,7 @@
 </div>
 
 <script>
-    // --- DADOS ---
+    // --- DADOS ESCALADOS (COM DATA) ---
     const DADOS_ROL = [
         {start: "2026-01-19", end: "2026-01-25", name: "Gustavo Patricio Silva", phone: "(11) 94265-1594"},
         {start: "2026-01-26", end: "2026-02-01", name: "Kely Caroline", phone: "(11) 97750-3747"},
@@ -380,6 +426,7 @@
         {start: "2026-12-28", end: "2026-12-31", name: "Pedro Felipe", phone: "(11) 96766-6330"}
     ];
 
+    // --- LISTAS FIXAS ---
     const DADOS_ARQUITETURA = [
         {name: "Erick Camargo", phone: "(11) 98447-5505"},
         {name: "Daniel de Abreu", phone: "(11) 98284-2917"},
@@ -394,6 +441,29 @@
         {name: "Nilson Jr (Coordenador)", phone: "(11) 99949 - 5880"}
     ];
 
+    const DADOS_CAMBIO = [
+        {name: "Lucas Gabriel Chiarett", phone: "(11) 98464 - 2383 / (11) 94121 - 2290"}
+    ];
+
+    const DADOS_CANAIS = [
+        {name: "Alan Aquino", phone: "(11) 97407 - 0919"}
+    ];
+
+    const DADOS_CORPORATIVOS = [
+        {name: "Maria de Fatima Goncalves e Silva (Gestão)", phone: "(11) 97525 - 9565"}
+    ];
+
+    const DADOS_RENDIX = [
+        {name: "Cícero Bezerra", phone: "(11) 93334 - 7532 / (11) 97527 - 1919"}
+    ];
+
+    const DADOS_INCIDENTES = [
+        {name: "URA Service desk", phone: "(11) 3817 - 0789 (Opção 2)"},
+        {name: "Vivian Aparecida Macedo", phone: "(11) 97342 - 5869"},
+        {name: "Telma Regina", phone: "(11) 96398 - 6108"}
+    ];
+
+    // --- LISTAS COM SEÇÕES (INFRA E CORE) ---
     const DADOS_INFRA = [
         {section: "Servidores", items: [
             {name: "Rogério Pippus", phone: "(11) 96253-0290"},
@@ -406,6 +476,65 @@
         ]},
         {section: "Coordenação Infra", items: [
             {name: "Fabio Del Bono", phone: "(11) 99688-0745"}
+        ]}
+    ];
+
+    const DADOS_CORE = [
+        {section: "Cobrança\\WS Cobrança", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
+        ]},
+        {section: "E-Bank\\Ebank Caixa", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "Contas Correntes", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "DDA\\DM (API do DDA)", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
+        ]},
+        {section: "IL - Interface SPB com o DDA", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "Tesouraria\\WS TS", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "SGR (SPB\\MES) e CAU SGR (SPB) - Cartões", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "Renda Fixa", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
+        ]},
+        {section: "CN (Central de Negócios)", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
+        ]},
+        {section: "SINQIA (Cartões SLC e R2C3)", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "Checagem Duplicatas", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
+        ]},
+        {section: "EA (Empacotador)", items: [
+            {name: "Ricardo Hiroshi", phone: "(11) 98115-2860"},
+            {name: "Leonardo Ferreira Duarte", phone: "(11) 91730 - 6068"}
+        ]},
+        {section: "CL\\CLE - Controle de Lastro", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
+        ]},
+        {section: "Sistema Confirme", items: [
+            {name: "Umberto Fausto", phone: "(11) 97320-0403"},
+            {name: "Bruno dos Santos Lourenco", phone: "(11) 93338-3033"}
         ]}
     ];
 
@@ -423,29 +552,59 @@
 
         if (!sistema) return;
 
-        // Se for lista fixa (PIX, Arquitetura, Infra)
-        if (sistema === "ARQUITETURA" || sistema === "PIX" || sistema === "INFRA") {
+        // Lista de sistemas com exibição fixa (sem data)
+        const sistemasFixos = ["ARQUITETURA", "PIX", "INFRA", "CAMBIO", "CANAIS", "CORPORATIVOS", "RENDIX", "CORE", "INCIDENTES"];
+
+        if (sistemasFixos.includes(sistema)) {
             placeholder.style.display = "none";
             
             let html = "";
             let badgeClass = "";
+            let dados = [];
+
+            // Define dados e cores
+            if (sistema === "ARQUITETURA") { dados = DADOS_ARQUITETURA; badgeClass = "bg-arquitetura"; }
+            else if (sistema === "PIX") { dados = DADOS_PIX; badgeClass = "bg-pix"; }
+            else if (sistema === "CAMBIO") { dados = DADOS_CAMBIO; badgeClass = "bg-cambio"; }
+            else if (sistema === "CANAIS") { dados = DADOS_CANAIS; badgeClass = "bg-canais"; }
+            else if (sistema === "CORPORATIVOS") { dados = DADOS_CORPORATIVOS; badgeClass = "bg-corporativos"; }
+            else if (sistema === "RENDIX") { dados = DADOS_RENDIX; badgeClass = "bg-rendix"; }
+            else if (sistema === "INCIDENTES") { dados = DADOS_INCIDENTES; badgeClass = "bg-incidentes"; }
+            else if (sistema === "CORE") { badgeClass = "bg-core"; } 
+            else if (sistema === "INFRA") { badgeClass = "bg-infra"; } 
             
-            if (sistema === "INFRA") {
-                badgeClass = "bg-infra";
-                html = `<div class="info-card"><span class="label-res">Sistema</span><span class="badge ${badgeClass}">INFRAESTRUTURA</span><div class="list-grid">`;
-                DADOS_INFRA.forEach(grupo => {
-                    html += `<div class="list-card"><div class="section-header">${grupo.section}</div>`;
+            // Lógica para sistemas com seções (INFRA e CORE) usando MASONRY
+            if (sistema === "INFRA" || sistema === "CORE") {
+                const dadosComSecao = (sistema === "INFRA") ? DADOS_INFRA : DADOS_CORE;
+                const nomeSistema = (sistema === "CORE") ? "CORE\\AUTBANK" : "INFRAESTRUTURA";
+                
+                // Abre o container do card principal
+                html = `<div class="info-card">
+                            <span class="label-res">Sistema</span>
+                            <span class="badge ${badgeClass}">${nomeSistema}</span>
+                            <div class="masonry-layout">`; // Usa a nova classe de layout
+                
+                dadosComSecao.forEach(grupo => {
+                    html += `<div class="list-card">
+                                <div class="section-header">${grupo.section}</div>`;
+                    
                     grupo.items.forEach(item => {
-                        html += `<div><span class="label-res">Responsável</span><span class="value-res" style="font-size:20px; margin-bottom:5px;">${item.name}</span><span class="label-res">Telefone</span><span class="value-res" style="font-size:18px; color:#81c784; margin-bottom:15px;">${item.phone}</span></div>`;
+                        html += `<div class="item-row">
+                                    <span class="label-res">Responsável</span>
+                                    <span class="name-text">${item.name}</span>
+                                    <span class="phone-text">${item.phone}</span>
+                                 </div>`;
                     });
-                    html += `</div>`;
+                    html += `</div>`; // Fecha list-card
                 });
-                html += `</div></div>`;
+                html += `</div></div>`; // Fecha masonry-layout e info-card
             } else {
-                const lista = (sistema === "ARQUITETURA") ? DADOS_ARQUITETURA : DADOS_PIX;
-                badgeClass = (sistema === "ARQUITETURA") ? "bg-arquitetura" : "bg-pix";
-                html = `<div class="info-card"><span class="label-res">Sistema</span><span class="badge ${badgeClass}">${sistema}</span><div class="list-grid">`;
-                lista.forEach(item => {
+                // Caso padrão lista simples
+                let nomeExibicao = sistema;
+                if (sistema === "INCIDENTES") nomeExibicao = "GESTÃO DE INCIDENTES";
+
+                html = `<div class="info-card"><span class="label-res">Sistema</span><span class="badge ${badgeClass}">${nomeExibicao}</span><div class="list-grid">`;
+                dados.forEach(item => {
                     html += `<div class="list-card"><span class="label-res">Responsável</span><span class="value-res" style="font-size:20px; margin-bottom:5px;">${item.name}</span>${item.extra ? `<div class="contact-methods" style="color:#b0bec5">${item.extra}</div>` : ""}<span class="label-res">Telefone</span><span class="value-res" style="font-size:18px; color:#81c784">${item.phone}</span></div>`;
                 });
                 html += `</div></div>`;
